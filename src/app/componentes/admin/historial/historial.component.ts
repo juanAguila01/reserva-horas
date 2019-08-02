@@ -96,17 +96,17 @@ export class HistorialComponent implements OnInit {
   }
 
   downloadPdf(){
-    let pdf = new jsPDF({
-      orientation: 'l',
-      unit: 'pt',
-      format: 'carta'
-     });
-    pdf.setFontSize(22); 
-    pdf.text("Reporte de Reservas Totales",30,30);
-    pdf.fromHTML($('#tablaPdf').get(0),30,30,{
-      "width":600
-    });
-    pdf.save("reporte.pdf");
+  //   let pdf = new jsPDF({
+  //     orientation: 'l',
+  //     unit: 'pt',
+  //     format: 'carta'
+  //    });
+  //   pdf.setFontSize(22); 
+  //   pdf.text("Reporte de Reservas Totales",30,30);
+  //   pdf.fromHTML($('#tablaPdf').get(0),30,30,{
+  //     "width":600
+  //   });
+  //   pdf.save("reporte.pdf");
   }
 
 }
