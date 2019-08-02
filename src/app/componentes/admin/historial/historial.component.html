@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="row py-2">
+    <div class="col">
+      <h3 class="text-center text-danger ">
+        Historial de Reservas {{admin.nombre}}
+      </h3> 
+    </div>
+  </div> 
+  <div class="row justify-content-center py-2 mb-4">
+    <div class="col">
+      <h2 class="mx-2">Mostrar por: </h2>
+    </div>
+    <!-- <div class="dropdown mx-2">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Mes
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="https://www.youtube.com/watch?v=lSm4QZqN8cA">Agosto</a>
+            <a class="dropdown-item" href="#">Septiembre</a>
+            <a class="dropdown-item" href="#">Agosto denuevo</a>
+          </div>
+      </div> -->
+    <div class="dropdown mx-2">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sucursal
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+        <div *ngFor="let recep of recepcionistas">
+          <a class="dropdown-item" (click)="ordenarSucursal(recep.direccion)">{{recep.direccion}}</a>
+        </div>     
+      </div> 
+    </div>
+    <div class="dropdown mx-2">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Estado
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" (click)="ordenarEstado('cancelado')">Canceladas</a>
+        <a class="dropdown-item" (click)="ordenarEstado('espera')">Por Confirmar</a>
+        <a class="dropdown-item" (click)="ordenarEstado('inacistencia')">No Asistidos</a>
+        <a class="dropdown-item" (click)="ordenarEstado('confirmado')">Confirmados</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="col">
+        <div class="btn btn-warning" (click)="getReservasAdmin()">Mostrar Todo</div>
+      </div>
+    </div> 
+        
+  </div>
+</div>
+    
+<div class="container" style="align-content: center">
+  <table class="table table-bordered" >
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Rut</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Sucursal</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Hora</th>
+        <th scope="col">Estado</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let reserva of reservas | paginate: { itemsPerPage: 4, currentPage: p }">
+        <th scope="row">{{ reserva.nombre }}</th>
+        <td>{{ reserva.rut }}</td>
+        <td>{{ reserva.telefono }}</td>
+        <td>{{ reserva.direccion }}</td>
+        <td>{{ reserva.fecha }}</td>
+        <td>{{ reserva.hora }}</td>
+        <td>{{ reserva.estado }}</td>
+      </tr>
+    </tbody>  
+  </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<div class="container" style="align-content: center" id="tablaPdf" style="height: 0; overflow: hidden;">
+  <table class="table table-bordered" >
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Rut</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Sucursal</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Hora</th>
+        <th scope="col">Estado</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let reserva of reservas">
+        <th scope="row">{{ reserva.nombre }}</th>
+        <td>{{ reserva.rut }}</td>
+        <td>{{ reserva.telefono }}</td>
+        <td>{{ reserva.direccion }}</td>
+        <td>{{ reserva.fecha }}</td>
+        <td>{{ reserva.hora }}</td>
+        <td>{{ reserva.estado }}</td>
+      </tr>
+    </tbody>  
+  </table>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center py-2">
+    <button type="button" class="col-2 btn btn-success mb-4" (click)="downloadPdf()">Generar PDF</button>
+  </div>
+</div>   

@@ -1,0 +1,13 @@
+#navegacion-footer{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#navegacion-footer li a{
+    text-decoration: none;
+    color: white;
+}
+
+#colores{
+    /* background: linear-gradient(to bottom, hsl(0, 3%, 8%) 25%,rgb(165, 160, 160)); */
+}      

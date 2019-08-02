@@ -1,0 +1,125 @@
+<div class="container">
+  <!-- en las reservas mias no va ni el rut ni el correo electronico ni mi Telefono
+  en las reservas que posea el admin o el recepcionista no necesita el corro mio 
+  como minimo -->
+  <div class="row pt-3 ">
+    <h2 class="col text-center text-success">Historial {{recepcionista.direccion}}</h2>
+  </div>
+  <div class="row justify-content-around"> 
+    <div class="col-3 text-success"><h2>Mostrar por:</h2></div>
+    <div class="col-3">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tipo De Orden 
+        </button> 
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" (click)="ordenar('cancelado')">Canceladas</a>
+          <a class="dropdown-item" (click)="ordenar('espera')">Por Confirmar</a>
+          <a class="dropdown-item" (click)="ordenar('inacistencia')">No Asistidos</a>
+          <a class="dropdown-item" (click)="ordenar('confirmado')">Confirmados</a>
+        </div>
+      </div>
+    </div>  
+    <div class="col-3">
+      <div class="btn btn-primary" (click)="mostrarTodas()">mostrar Todas</div>
+    </div>
+    <div class="col-3"> 
+      <div class="btn btn-primary" data-toggle="modal" data-target="#recepcionReservar">Reservar</div> 
+    </div>
+  </div>
+  <div class="w-100"><hr></div> 
+  <div class="row">
+    <div class="col">
+      <table class="table table-hover border border-primary">
+        <thead class=" bg-primary text-white">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Rut</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Sucursal</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Hora</th>
+            <th scope="col">Estado</th>
+            <th scope="col" class="text-center">Confirmación</th>           
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reserva of reservas | paginate: { itemsPerPage: 4, currentPage: p }">
+            <th >{{reserva.nombre}}</th>
+            <td >{{reserva.rut}}</td>
+            <td >{{reserva.telefono}}</td> 
+            <td >{{reserva.direccion}}</td>
+            <td >{{reserva.fecha|date}}</td>
+            <td >{{reserva.hora}}</td> 
+            <td>{{reserva.estado}}</td>
+            <td class="row justify-content-around">
+              <button type="button" class="btn btn-primary" [routerLink]="['/editarReserva',reserva.id]">Editar</button>
+            </td>                           
+          </tr> 
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls> 
+    </div>
+  </div>
+</div>
+
+<!-- Modal reserva de recepcionista-->
+<div class="modal fade" id="recepcionReservar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLongTitle" *ngIf="!camposRequeridos" style="width: 100%; text-align: center;">Reservar</h2>
+        <div class="alert alert-danger" role="alert" *ngIf="camposRequeridos" style="width: 100%;text-align: center;">  
+          Todos los campos son requeridos. 
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form id="formNewReserva" name="formNewReserva" #reservaData = "ngForm" (ngSubmit) = "agregarReservaRecepcion(reservaData.value)">
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" ngModel>
+              </div>
+              <div class="form-group col">
+                <label for="sucursal">Sucursal</label>
+                <input type="text" [(ngModel)]="recepcionista.direccion" class="form-control col" id="direccion" aria-placeholder="sucursal" name="direccion" ngModel>  
+              </div>
+            </div>
+            <div class="form-row">   
+              <div class="form-group col">
+                <label for="rut">Rut</label>
+                <input type="text" id="rut" name="rut" class="form-control" ngModel placeholder="Rut">
+                <small *ngIf="rutInvalido" class="text-danger">rut invalido!</small>
+              </div> 
+              <div class="form-group col">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Numero Contacto" ngModel>
+                <small *ngIf="telefonoInvalido" class="text-danger">Telefono invalido!</small>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="fecha">Fecha</label>
+                <input type="date" class="form-control" id="fecha" name="fecha" ngModel>
+              </div>
+              <div class="form-group col">
+                <label for="hora">Hora</label>
+                <input type="time" class="form-control" id="hora" name="hora" ngModel>
+              </div>
+            </div> 
+            <div class="row justify-content-center">
+              <div class="col-3">
+                <input type="submit" class="btn btn-primary" value="Reservar">
+              </div>
+            </div>      
+          </form> 
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+          

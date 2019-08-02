@@ -1,0 +1,33 @@
+<!-- las navbars son fluid por default. -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary w-100">
+  <a class="navbar-brand" routerLink ="login" routerLinkActive = "router-link-active" (click)="mostrar(1)">C</a>
+  <a class="navbar-brand" routerLink ="login" routerLinkActive = "router-link-active" (click)="mostrar(2)">A</a>
+  <a class="navbar-brand" routerLink ="login" routerLinkActive = "router-link-active" (click)="mostrar(3)">R</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item" *ngIf="cliente">
+        <a class="nav-link" routerLink ="reservar" routerLinkActive = "router-link-active">Reservar</a>
+      </li>
+      <li class="nav-item" *ngIf="cliente">
+        <a class="nav-link" routerLink ="clienteMisReservas" routerLinkActive = "router-link-active">Mis Reservas</a> 
+      </li>
+      <li class="nav-item" *ngIf="admin">
+        <a class="nav-link" routerLink ="historialGlobal" routerLinkActive = "router-link-active">Historial Global</a> 
+      </li>
+
+      <li class="nav-item" *ngIf="admin">
+        <a class="nav-link" routerLink ="listaRecepcionistas" routerLinkActive = "router-link-active">Lista de Recepcionistas</a> 
+      </li>
+      <li class="nav-item" *ngIf="recepcionista">
+        <a class="nav-link" routerLink ="historialSucursal" routerLinkActive = "router-link-active">Historial Sucural</a> 
+      </li>
+      
+      <li class="nav-item" *ngIf="recepcionista">
+        <a class="nav-link" routerLink ="recepcionistaReserva" routerLinkActive = "router-link-active">Reservar</a> 
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,77 @@
+<div class="container-fluid" id="imagenFondo">
+  <div class="row justify-content-center py-5" style="padding-top: 40px">
+    <div class="col-7">
+      <div class="card text-success mt-4" style="opacity: .9;">
+        <div class="card-header">
+          <h2 class="text-center text-success" *ngIf="!camposRequeridos">Editar Reserava</h2>
+          <div class="alert alert-danger" role="alert" *ngIf="camposRequeridos" style="width: 100%;text-align: center;">
+            Todos los campos son requeridos.
+          </div>
+        </div>
+        <div class="card-body">
+          <form id="formNewReserva" name="formNewReserva" #reservaData2="ngForm"
+            (ngSubmit)="editarReserva(reservaData2.value)">
+            <div class="form-row">
+              <div class="form-group col-6">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre"
+                  [(ngModel)]="data.nombre" ngModel>
+              </div>
+              <div class="col-6">
+                <div class="form-row">
+                  <div class="form-group col-6">
+                    <label for="direccion">Sucursal</label>
+                    <input type="text" class="form-control col" id="direccion" placeholder="sucursal" name="direccion"
+                      [(ngModel)]="data.direccion" ngModel>
+
+                  </div>
+                  <div class="form-group col-6">
+                    <label for="estado">Estado</label>
+                    <select class="form-control col" id="estado" placeholder="estado" name="estado"
+                      [(ngModel)]="data.estado" ngModel>
+                      <option value="espera">espera</option>
+                      <option value="cancelado">cancelado</option>
+                      <option value="inacistencia">Inacistencia</option>
+                      <option value="confirmado">Confirmado</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="rut">Rut</label>
+                <input type="text" id="rut" name="rut" class="form-control" [(ngModel)]="data.rut" ngModel>
+                <small class="text-danger" *ngIf="rutInvalido">Rut Invalido!</small>
+              </div>
+              <div class="form-group col">
+                <label for="telefono">Telefono</label>
+                <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Numero Contacto"
+                  [(ngModel)]="data.telefono" ngModel>
+                <small class="text-danger" *ngIf="telefonoInvalido">Telefono Invalido!</small>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="fecha">Fecha</label>
+                <input type="date" class="form-control" id="fecha" name="fecha" [(ngModel)]="data.fecha" ngModel>
+              </div>
+              <div class="form-group col">
+                <label for="hora">Hora</label>
+                <input type="time" class="form-control" id="hora" name="hora" [(ngModel)]="data.hora" ngModel>
+              </div>
+            </div>
+            <div class="row justify-content-start">
+              <div class="col-3">
+                <input type="submit" class="btn btn-warning" value="Editar Reservar">
+              </div>
+              <div class="col-3 ml-3">
+                <div class="btn btn-primary" (click)="restaurar()">Restaurar</div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

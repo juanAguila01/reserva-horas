@@ -1,0 +1,103 @@
+<div class="container">
+    <div class="row pt-3 ">
+      <h2 class="col text-center text-success">Reservas de {{clienteActual.nombre}}</h2>
+    </div>
+    <div class="row justify-content-center">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary col-2" data-toggle="modal" data-target="#exampleModal">
+        Agregar Reserva 
+      </button>
+    </div>
+    <div class="w-100"><hr></div>
+    <div class="row my-4"> 
+      <div class="col">
+        <table class="table table-hover border border-primary">
+          <thead class=" bg-primary text-white">
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Rut</th>
+              <th scope="col">Telefono</th>
+              <th scope="col">Sucursal</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Hora</th>                                                              
+              <th scope="col">Estado</th>
+            </tr>                              
+          </thead>
+          <tbody>
+            <tr *ngFor ="let reserva of reservas | paginate: { itemsPerPage: 4, currentPage: p }">
+              <th scope="row">{{reserva.nombre}}</th>
+              <td>{{reserva.rut}}</td>
+              <td>{{reserva.telefono}}</td>
+              <td>{{reserva.direccion}}</td>  
+              <td>{{reserva.fecha}}</td>
+              <td>{{reserva.hora}}</td>
+              <td>{{reserva.estado}}</td>  
+            </tr>              
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+</div>   
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" *ngIf="!camposRequeridos" style="width: 100%; text-align:center;">Reserva</h5>
+          <div class="alert alert-danger" role="alert" *ngIf="camposRequeridos" style="width: 100%;text-align: center;">   
+            Todos los campos son requeridos. 
+          </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formNewReserva" name="formNewReserva" #reservaData = "ngForm" (ngSubmit) = "agregarReserva(reservaData.value)">
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" [(ngModel)]="clienteActual.nombre" id="nombre" name="nombre" placeholder="Nombre" ngModel>
+
+              </div>
+              <div class="form-group col" > 
+                <label for="sucursal">Sucursal</label>
+                <select   class="form-control col" id="direccion" aria-placeholder="sucursal" name="direccion" ngModel>
+                  <option *ngFor="let recep of recepcionistas" [value]="recep.direccion">{{recep.direccion}}</option>
+                </select>  
+              </div>  
+            </div> 
+        
+            <div class="form-row">   
+              <div class="form-group col">
+                <label for="rut">Rut</label>
+                <input type="text" [(ngModel)]="clienteActual.rut" id="rut" name="rut" class="form-control" ngModel placeholder="Rut">
+                <small *ngIf="rutInvalido" class="text-danger">rut invalido!</small>
+              </div> 
+              <div class="form-group col">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" class="form-control" [(ngModel)]="clienteActual.telefono" id="telefono" name="telefono" placeholder="Numero Contacto" ngModel>
+                <small *ngIf="telefonoInvalido" class="text-danger">Telefono invalido!</small>
+              </div>
+            </div>
+         
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="fecha">Fecha</label>
+                <input type="date" class="form-control" id="fecha" name="fecha" ngModel>
+              </div>
+              <div class="form-group col">
+                <label for="hora">Hora</label>
+                <input type="time" class="form-control" id="hora" name="hora" ngModel>
+              </div>
+            </div> 
+            <div class="row justify-content-center">
+              <div class="col-3">
+                <input type="submit" class="btn btn-primary" value="Reservar">
+              </div>
+            </div>      
+          </form>
+        </div> 
+    </div>
+  </div>
+</div> 

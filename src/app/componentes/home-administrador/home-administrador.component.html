@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary w-100">
+  <a class="navbar-brand" routerLink ="login" routerLinkActive = "router-link-active">Logo</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse " id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link disabled" routerLink ="" routerLinkActive = "router-link-active">Nuestros Platos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" routerLink ="" routerLinkActive = "router-link-active">Ofertas</a> 
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" routerLink ="" routerLinkActive = "router-link-active">Nosotros</a> 
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="listaRecepcionistas()">Lista Recepcionistas</a> 
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="adiminReservas()">Historial</a> 
+      </li>
+    </ul>
+  </div> 
+  <div class="float-left btn btn-primary" (click)="home()">Cerrar Sesion</div>
+</nav> 
+
+<router-outlet></router-outlet> 
+<app-pie-de-pagina></app-pie-de-pagina>

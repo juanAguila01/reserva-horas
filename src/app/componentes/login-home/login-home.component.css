@@ -1,0 +1,27 @@
+#mover{
+    position: absolute;
+    left: -40%; 
+} 
+#mover a:hover{
+    background-color: rgb(42, 118, 189);   
+} 
+img{
+    height: 300px;
+}
+#contenedor{
+    position: relative;
+}
+#modalIngresar,#recepcionistaLogin,#adminLogin{
+    display: none;
+    position: absolute ; 
+    top: 0;
+    bottom: -177px;    
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0,0.8);
+    transition-duration: 1s;
+    z-index: 300; 
+} 
+#modalIngresar .card,#recepcionistaLogin .card,#adminLogin .card{
+    z-index: 20;  
+}      
