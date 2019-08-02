@@ -6,13 +6,11 @@ import {NgxPaginationModule} from 'ngx-pagination';
  
 import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router';
-import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
 import { PieDePaginaComponent } from './componentes/pie-de-pagina/pie-de-pagina.component';
 import { HistorialComponent } from './componentes/admin/historial/historial.component';
 import { ListaRecepcionComponent } from './componentes/admin/lista-recepcion/lista-recepcion.component';
 import { HistorialSucursalComponent } from './componentes/recepcionista/historial-sucursal/historial-sucursal.component';
 import { ClienteMisReservasComponent } from './componentes/cliente/cliente-mis-reservas/cliente-mis-reservas.component';
-import { LoginComponent } from './componentes/login/login.component';
 import { EditarReservaComponent } from './componentes/recepcionista/editar-reserva/editar-reserva.component';
 import { EditarRecepcionistaComponent } from './componentes/admin/editar-recepcionista/editar-recepcionista.component';
 import { LoginHomeComponent } from './componentes/login-home/login-home.component';
@@ -27,7 +25,6 @@ import { ReservaService } from './servicios/reserva.service';
 import { ValidacionReservasService } from './servicios/validacion-reservas.service';
 
 const routes: Routes = [ 
-  {path:"login", component: LoginComponent},
   {path : "editarRecepcionista/:id", component : EditarRecepcionistaComponent},
   {path : "editarReserva/:id", component : EditarReservaComponent}, 
   {path: "loginHome", component: LoginHomeComponent}, 
@@ -59,13 +56,11 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    CabeceraComponent,
     PieDePaginaComponent,
     HistorialComponent,
     ListaRecepcionComponent,
     HistorialSucursalComponent,
     ClienteMisReservasComponent,
-    LoginComponent,
     EditarReservaComponent,
     EditarRecepcionistaComponent,
     LoginHomeComponent,
